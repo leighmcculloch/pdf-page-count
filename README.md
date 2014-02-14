@@ -25,19 +25,19 @@ The recommended installation method is via Rubygems.
 
 Count the pages in a single PDF.
 
-	Mint:~ leighmcculloch$ pdf-page-count 1.pdf
+	Puter:~ user$ pdf-page-count 1.pdf
 
 Count the pages in a multiple individual PDFs.
 
-	Mint:~ leighmcculloch$ pdf-page-count 1.pdf morefiles/2.pdf
+	Puter:~ user$ pdf-page-count 1.pdf morefiles/2.pdf
 
 Count the pages in PDFs contained in a directory.
 
-	Mint:~ leighmcculloch$ pdf-page-count morefiles
+	Puter:~ user$ pdf-page-count morefiles
 
 Count the pages in PDFs contained in a directory and it's subdirectories recursively.
 
-	Mint:~ leighmcculloch$ pdf-page-count -R morefiles	
+	Puter:~ user$ pdf-page-count -R morefiles	
 
 # Licence
 
