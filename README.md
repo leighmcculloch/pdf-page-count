@@ -30,7 +30,7 @@ Count the pages in a single PDF.
 Count the pages in a multiple individual PDFs.
 
 	Mint:~ leighmcculloch$ pdf-page-count 1.pdf morefiles/2.pdf
-	
+
 Count the pages in PDFs contained in a directory.
 
 	Mint:~ leighmcculloch$ pdf-page-count morefiles
