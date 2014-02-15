@@ -27,10 +27,11 @@ opt_parser.parse!
 puts opt_parser if ARGV.empty?
 
 if ARGV.any?
+  paths = ARGV
   counter = PdfPageCount::PdfPageCounter.new
   
-  ARGV.each do |arg|
-    files = PdfPageCount::FileUtil.find_pdf_files(arg, recursive: options[:recursive])
+  paths.each do |path|
+    files = PdfPageCount::FileUtil.find_pdf_files(path, recursive: options[:recursive])
     files.each do |file|
       counter.add_pdf_file(file) do |file,pages|
         if options[:verbose]
