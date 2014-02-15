@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require_relative '../lib/pdf-page-count'
+
+options = {}
+
+opt_parser = OptionParser.new do |opt|
+  opt.banner = "Usage: pdf-page-count [options] [file/path] [file/path] ..."
+  opt.separator  ""
+  opt.separator  "Options"
+
+  opt.on("-R","--recursive","Recursively search for .pdf files") do
+    options[:recursive] = true
+  end
+
+  opt.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+
+  opt.on("-h","--help","help") do
+    puts opt_parser
+  end
+end
+
+opt_parser.parse!
+puts opt_parser if ARGV.empty?
+
+if ARGV.any?
+  counter = PdfPageCount::PdfPageCounter.new
+  
+  ARGV.each do |arg|
+    files = PdfPageCount::FileUtil.find_pdf_files(arg, recursive: options[:recursive])
+    files.each do |file|
+      counter.add_pdf_file(file) do |file,pages|
+        if options[:verbose]
+          puts "#{file}: #{pages}"
+        end
+      end
+    end
+  end
+  
+  puts "Total Pages: #{counter.total_pages}"
+end
