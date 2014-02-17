@@ -32,14 +32,9 @@ if ARGV.any?
   
   counter.start_counting
   
-  paths.each do |path|
-    files = PdfPageCount::FileUtil.find_pdf_files(path, recursive: options[:recursive])
-    files.each do |file|
-      counter.add_pdf_file(file) do |file,pages|
-        if options[:verbose]
-          puts "#{file}: #{pages}"
-        end
-      end
+  counter.add_pdf_paths(paths, recursive: options[:recursive]) do |file, pages|
+    if options[:verbose]
+      puts "#{file}: #{pages}"
     end
   end
 
