@@ -8,8 +8,8 @@ module PdfPageCount
       @total_pages = 0
     end
     
-    def start_counting
-      @process_pool = Thread.pool(4)
+    def start_counting(threads: 10)
+      @process_pool = Thread.pool(threads)
       @callback_pool = Thread.pool(1)
     end
     
