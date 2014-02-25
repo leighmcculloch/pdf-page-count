@@ -10,4 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    = "http://rubygems.org/gems/pdf-page-count"
   s.license     = "MIT"
   s.executables = [ "pdf-page-count" ]
+  s.add_runtime_dependency "thread", ["= 0.1.3"]
+  s.add_runtime_dependency "pdf-reader", ["= 1.3.3"]
 end
