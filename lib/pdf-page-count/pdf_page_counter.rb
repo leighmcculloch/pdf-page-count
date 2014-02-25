@@ -1,5 +1,3 @@
-require 'parallel'
-
 module PdfPageCount
   
   class PdfPageCounter
