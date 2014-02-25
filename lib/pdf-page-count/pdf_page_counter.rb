@@ -1,4 +1,4 @@
-require 'parallel'
+require 'forkmanager'
 
 module PdfPageCount
   
@@ -9,6 +9,15 @@ module PdfPageCount
     end
     
     def start_counting
+      @forkmanager = Parallel::ForkManager.new(3, {}, 1)
+      @forkmanager.run_on_finish do |pid,exit_code,ident,exit_signal,core_dump,data_structure|
+         if defined? data_structure
+             puts "Received from child process #{pid}: #{data_structure}!"
+             increment_pages(data_structure[:pages])
+         else
+             puts "No message received from child process #{pid}!"
+         end
+       end
     end
     
     def add_pdf_paths(paths, recursive: false)
@@ -28,13 +37,28 @@ module PdfPageCount
       end
     end
     
-    def add_pdf_file(file)
+    def add_pdf_file(file)  
+      if !@forkmanager.nil?
+        @forkmanager.start(file) and return
+      end
+      
       pages = PdfUtil.count_pages(file)
-      @total_pages += pages
+      puts pages
+      increment_pages(pages)
       yield file, pages
+
+      if !@forkmanager.nil?
+        @forkmanager.finish(0, { :pages => pages })
+      end
+    end
+    
+    def increment_pages(pages = 1)
+      @total_pages += pages
     end
     
     def finish_counting
+      @forkmanager.wait_all_children
+      @forkmanager = nil
     end
     
     def total_pages
