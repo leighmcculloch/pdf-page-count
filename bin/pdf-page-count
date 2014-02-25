@@ -6,7 +6,9 @@ require_relative '../lib/pdf-page-count'
 
 spec = Gem::Specification::load('pdf-page-count.gemspec')
 
-options = {}
+options = {
+  :threads => 10
+}
 
 opt_parser = OptionParser.new do |opt|
   opt.banner = "Usage: pdf-page-count [options] [file/path] [file/path] ..."
@@ -16,6 +18,10 @@ opt_parser = OptionParser.new do |opt|
 
   opt.on("-R", "--recursive", "Recursively search for .pdf files") do
     options[:recursive] = true
+  end
+
+  opt.on("-T", "--threads [N]", Integer, "Number of threads used to read pdf files") do |threads|
+    options[:threads] = threads
   end
 
   opt.on("-v", "--[no-]verbose", "Run verbosely") do |v|
@@ -36,9 +42,10 @@ if ARGV.empty?
 else
   paths = ARGV
   counter = PdfPageCount::PdfPageCounter.new
-  
-  counter.start_counting
-  
+
+  counter.start_counting(threads: options[:threads])
+  puts "Starting PDF page count with #{options[:threads]} threads."
+
   counter.add_pdf_paths(paths, recursive: options[:recursive]) do |file, pages|
     if options[:verbose]
       puts "#{file}: #{pages}"

@@ -1,3 +1,5 @@
+require 'thread/pool'
+
 module PdfPageCount
   
   class PdfPageCounter
@@ -6,7 +8,9 @@ module PdfPageCount
       @total_pages = 0
     end
     
-    def start_counting
+    def start_counting(threads: 10)
+      @process_pool = Thread.pool(threads)
+      @callback_pool = Thread.pool(1)
     end
     
     def add_pdf_paths(paths, recursive: false)
@@ -27,12 +31,18 @@ module PdfPageCount
     end
     
     def add_pdf_file(file)
-      pages = PdfUtil.count_pages(file)
-      @total_pages += pages
-      yield file, pages
+      @process_pool.process do
+        pages = PdfUtil.count_pages(file)
+        @total_pages += pages
+        @callback_pool.process do
+          yield file, pages
+        end
+      end
     end
     
     def finish_counting
+      @process_pool.shutdown
+      @callback_pool.shutdown
     end
     
     def total_pages
