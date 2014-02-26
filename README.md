@@ -8,7 +8,7 @@ Enable verbose output to see each individual PDF's page count when doing so.
 
 The recommended installation method is via Rubygems.
 
-	gem install pdf-reader
+	gem install pdf-page-count
 
 # Usage
 
@@ -40,8 +40,8 @@ Count the pages in PDFs contained in a directory and it's subdirectories recursi
 
 # Thanks
 
-Uses [pdf-reader](http://github.com/yob/pdf-reader) to count pages.
-Uses [thread](https://github.com/meh/ruby-thread) to queue work on a thread pool.  
+* [pdf-reader](http://github.com/yob/pdf-reader) for counting pages in a single PDF.
+* [thread](https://github.com/meh/ruby-thread) for the thread pool.  
 
 # Licence
 
