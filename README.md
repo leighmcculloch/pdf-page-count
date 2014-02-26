@@ -4,8 +4,6 @@ A command line application that will count the number of pages in multiple or in
 
 Enable verbose output to see each individual PDF's page count when doing so.
 
-Uses [PDF::Reader library](http://github.com/yob/pdf-reader) to count pages.
-
 # Installation
 
 The recommended installation method is via Rubygems.
@@ -17,7 +15,8 @@ The recommended installation method is via Rubygems.
 	Usage: pdf-page-count [options] [file/path] [file/path] ...
 	
 	Options
-	    -R, --recursive                  Recursively search for .pdf 	files
+	    -R, --recursive                  Recursively search for .pdf files
+	    -T, --threads [N]                Number of threads used to read pdf files
 	    -v, --[no-]verbose               Run verbosely
 	    -h, --help                       help
 
@@ -38,6 +37,11 @@ Count the pages in PDFs contained in a directory.
 Count the pages in PDFs contained in a directory and it's subdirectories recursively.
 
 	Puter:~ user$ pdf-page-count -R morefiles	
+
+# Thanks
+
+Uses [pdf-reader](http://github.com/yob/pdf-reader) to count pages.
+Uses [thread](https://github.com/meh/ruby-thread) to queue work on a thread pool.  
 
 # Licence
 
