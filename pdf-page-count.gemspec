@@ -1,13 +1,12 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-name = "pdf-page-count"
-require "#{name}/version"
+require "pdf-page-count/version"
 
 Gem::Specification.new do |s|
-  s.name        =  name
+  s.name        = "pdf-page-count"
   s.version     = PdfPageCount::VERSION
   s.date        = "2014-02-26"
   s.summary     = "Counts the pages in single and multiple PDFs."
-  s.description = "Counts the pages in single and multiple PDFs. Capale of recursively finding PDFs in directories."
+  s.description = "Counts the pages in single and multiple PDFs. Capable of recursively finding PDFs in directories."
   s.authors     = [ "Leigh McCulloch" ]
   s.email       = "leigh@mcchouse.com"
   s.files       = [
