@@ -4,15 +4,13 @@ require 'optparse'
 require 'rubygems'
 require_relative '../lib/pdf-page-count'
 
-spec = Gem::Specification::load('pdf-page-count.gemspec')
-
 options = {
   :threads => 10
 }
 
 opt_parser = OptionParser.new do |opt|
   opt.banner = "Usage: pdf-page-count [options] [file/path] [file/path] ..."
-  opt.separator("Version: #{spec.version}")
+  opt.separator("Version: #{PdfPageCount::VERSION}")
   opt.separator("")
   opt.separator("Options")
 
@@ -31,7 +29,7 @@ opt_parser = OptionParser.new do |opt|
   opt.on("-h", "--help", "help") do
     puts opt_parser
   end
-  
+
   opt.separator("")
 end
 
@@ -53,6 +51,6 @@ else
   end
 
   counter.finish_counting
-  
+
   puts "Total Pages: #{counter.total_pages}"
 end
