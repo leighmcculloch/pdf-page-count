@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.files       = `git ls-files -z`.split("\0")
   s.homepage    = "http://rubygems.org/gems/pdf-page-count"
   s.license     = "BSD-3-Clause"
-  s.executables = [ "pdf-page-count" ]
+  s.executables = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   s.add_runtime_dependency "thread", ["= 0.1.3"]
   s.add_runtime_dependency "pdf-reader", ["= 1.3.3"]
 end
