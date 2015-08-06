@@ -8,11 +8,7 @@ Gem::Specification.new do |s|
   s.description = "Counts the pages in single and multiple PDFs. Capable of recursively finding PDFs in directories."
   s.authors     = [ "Leigh McCulloch" ]
   s.email       = "leigh@mcchouse.com"
-  s.files       = [
-    "lib/pdf-page-count.rb",
-    "lib/pdf-page-count/file_util.rb",
-    "lib/pdf-page-count/pdf_page_counter.rb",
-    "lib/pdf-page-count/pdf_util.rb" ]
+  s.files       = `git ls-files -z`.split("\0")
   s.homepage    = "http://rubygems.org/gems/pdf-page-count"
   s.license     = "BSD-3-Clause"
   s.executables = [ "pdf-page-count" ]
