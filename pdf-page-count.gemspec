@@ -4,7 +4,6 @@ require "pdf-page-count/version"
 Gem::Specification.new do |s|
   s.name        = "pdf-page-count"
   s.version     = PdfPageCount::VERSION
-  s.date        = "2014-02-26"
   s.summary     = "Counts the pages in single and multiple PDFs."
   s.description = "Counts the pages in single and multiple PDFs. Capable of recursively finding PDFs in directories."
   s.authors     = [ "Leigh McCulloch" ]
